@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import { logInUser } from "../../services/userServices";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,7 +22,8 @@ function LoginPage() {
 
     try {
       const result = await logInUser({ email, password });
-      console.log("User added successfully!", result);
+      console.log("User logged in successfully!", result);
+      router.push('/users');
     } catch (error) {
       console.error(error.message);
     }

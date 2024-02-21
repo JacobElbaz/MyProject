@@ -1,8 +1,7 @@
+import { generateToken } from "../auth/authUser.js";
+
 // Array to temporarily store users
-let users = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', tel: '123-456-7890', password: 'password123' },
-    { id: 2, name: 'Jane Doe', email: 'jane@example.com', tel: '987-654-3210', password: 'password456' }
-  ];
+let users = [];
 
 // Controller to get all users
 export const getAllUsers = (req, res) => {
@@ -25,4 +24,21 @@ export const createUser = (req, res) => {
   users.push(newUser);
 
   res.status(201).json(newUser);
+};
+
+// Controller to LogIn a user 
+export const logIn = (req, res) => {
+    const { email, password } = req.body;
+    const user = users.find((user) => user.email === email);
+    if (!user) {
+        return res.status(401).json({ message: "Email doesn't match."});
+    }
+
+    if (!user.password === password) {
+        return res.status(401).json({ message: 'Wrong password.'});
+    }
+
+    const token = generateToken(user);
+
+    res.json({ message: 'Authentication successful!', token });
 };

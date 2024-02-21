@@ -8,6 +8,7 @@ import {
 import { addUser } from "../../services/userServices";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ const RegisterPage = () => {
   const [telephone, setTelephone] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,6 +56,7 @@ const RegisterPage = () => {
     try {
       const result = await addUser({ name, email, telephone, password });
       console.log("User added successfully!", result);
+      router.push("/login");
     } catch (error) {
       console.error(error.message);
     }
