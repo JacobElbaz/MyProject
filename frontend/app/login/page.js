@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { logInUser } from "../../services/userServices";
+import Link from "next/link";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -45,6 +46,9 @@ function LoginPage() {
 
         <button type="submit">Log in</button>
       </form>
+      <p>
+        Don't have an account?<Link href={"/register"}>{" Register"}</Link>
+      </p>
     </div>
   );
 }
