@@ -171,3 +171,8 @@ form {
   position: sticky;
   top: 0;
 }
+
+.logout-btn {
+  position: absolute;
+  left: 50px;
+}

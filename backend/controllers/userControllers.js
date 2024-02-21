@@ -1,4 +1,5 @@
 import { generateToken } from "../auth/authUser.js";
+import bcrypt from 'bcrypt';
 
 // Array to temporarily store users
 let users = [];
@@ -11,14 +12,15 @@ export const getAllUsers = (req, res) => {
 };
 
 // Controller to create a new user
-export const createUser = (req, res) => {
+export const createUser = async (req, res) => {
   const { name, email, tel, password } = req.body;
-
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
   const newUser = {
     name,
     email,
     tel,
-    password
+    password: hashedPassword
   };
 
   users.push(newUser);
@@ -27,14 +29,15 @@ export const createUser = (req, res) => {
 };
 
 // Controller to LogIn a user 
-export const logIn = (req, res) => {
+export const logIn = async (req, res) => {
     const { email, password } = req.body;
     const user = users.find((user) => user.email === email);
     if (!user) {
-        return res.status(401).json({ message: "Email doesn't match."});
+        return res.status(401).json({ message: "Invalid email."});
     }
-
-    if (!user.password === password) {
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
         return res.status(401).json({ message: 'Wrong password.'});
     }
 
