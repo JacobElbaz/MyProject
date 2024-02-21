@@ -1,11 +1,15 @@
 import express from 'express';
 import routes from './routes/userRoutes.js';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON data
 app.use(express.json());
+app.use(cors({
+  credentials: true,
+}));
 
 // Use the defined routes
 app.use('/api', routes);
