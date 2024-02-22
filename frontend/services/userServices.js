@@ -38,7 +38,7 @@ export const getAllUsers = async () => {
       throw new Error("Error retrieving users from the server.");
     }
   } catch (error) {
-    throw new Error("Communication error with server:", error);
+    throw new Error(error.message);
   }
 };
 
@@ -57,9 +57,10 @@ export const logInUser = async (userData) => {
       localStorage.setItem('token', result.token);
       return result;
     } else {
-      throw new Error("Error found user in the server.");
+      console.log(response);
+      throw new Error("Incorrect username or password.");
     }
   } catch (error) {
-    throw new Error("Communication error with server:", error);
+    throw new Error(error.message);
   }
 };

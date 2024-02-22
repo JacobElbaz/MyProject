@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { logInUser } from "../../services/userServices";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -23,9 +24,11 @@ function LoginPage() {
     try {
       const result = await logInUser({ email, password });
       console.log("User logged in successfully!", result);
-      router.push('/users');
+      toast.success(`Welcome ${result.userName} !`);
+      router.push("/users");
     } catch (error) {
-      console.error(error.message);
+      toast.error(error.message);
+      console.error(error);
     }
   };
   return (
@@ -46,12 +49,12 @@ function LoginPage() {
           id="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <button type="submit">Log in</button>
       </form>
       <p>
         Don't have an account?<Link href={"/register"}>{" Register"}</Link>
       </p>
+      <Toaster/>
     </div>
   );
 }

@@ -43,5 +43,5 @@ export const logIn = async (req, res) => {
 
     const token = generateToken(user);
 
-    res.json({ message: 'Authentication successful!', token });
+    res.json({ message: 'Authentication successful!', token, userName: user.name });
 };

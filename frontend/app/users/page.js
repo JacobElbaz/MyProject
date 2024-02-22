@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userServices";
 import { redirect, useRouter } from "next/navigation";
+import toast, {Toaster} from "react-hot-toast";
 
 const UsersListPage = () => {
   const [users, setUsers] = useState([]);
@@ -59,6 +60,7 @@ const UsersListPage = () => {
         </table>
       </div>
       <button className="logout-btn" onClick={handleLogout}>LOGOUT</button>
+      <Toaster position="bottom-left"/>
     </div>
   );
 };

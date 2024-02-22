@@ -9,6 +9,7 @@ import { addUser } from "../../services/userServices";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -56,6 +57,7 @@ const RegisterPage = () => {
     try {
       const result = await addUser({ name, email, telephone, password });
       console.log("User added successfully!", result);
+      toast.success("Registration successful!");
       router.push("/login");
     } catch (error) {
       console.error(error.message);
@@ -118,6 +120,7 @@ const RegisterPage = () => {
       <p>
         Already have an account?<Link href={"/login"}>{" Log In"}</Link>
       </p>
+      <Toaster position="bottom-left"/>
     </div>
   );
 };
