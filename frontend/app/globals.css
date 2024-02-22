@@ -13,7 +13,7 @@ body {
 
 body {
   color: black;
-  background: #817ac2ad;
+  background: #6f85ffad;
 }
 
 .footer {
@@ -83,12 +83,13 @@ form {
 
 .users-list table {
   border-collapse: collapse;
-  width: 550px;
+  width: 100%;
   background-color: #ddd;
   table-layout: fixed;
 }
 
 .table-container {
+  margin: 12px;
   overflow-y: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
@@ -113,5 +114,7 @@ form {
 
 .logout-btn {
   position: absolute;
-  left: 50px;
+  left: 12px;
+  top: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
