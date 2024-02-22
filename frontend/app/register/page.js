@@ -60,6 +60,7 @@ const RegisterPage = () => {
       toast.success("Registration successful!");
       router.push("/login");
     } catch (error) {
+      toast.error(error.message);
       console.error(error.message);
     }
   };

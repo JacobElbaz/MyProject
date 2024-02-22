@@ -14,6 +14,14 @@ export const getAllUsers = (req, res) => {
 // Controller to create a new user
 export const createUser = async (req, res) => {
   const { name, email, tel, password } = req.body;
+
+  // Check if the user already registered
+  if(users.find((user) => user.email === email)){
+    return res.status(409).json({
+      error: 'Conflict',
+      message: 'User already exists.'
+    });
+  }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const newUser = {

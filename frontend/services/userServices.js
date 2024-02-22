@@ -15,10 +15,11 @@ export const addUser = async (userData) => {
       const result = await response.json();
       return result;
     } else {
-      throw new Error("Error adding user to server.");
+      const data = await response.json();
+      throw new Error(`Error adding user to server: ${data.message}`);
     }
   } catch (error) {
-    throw new Error("Communication error with server:", error);
+    throw new Error(error.message);
   }
 };
 
