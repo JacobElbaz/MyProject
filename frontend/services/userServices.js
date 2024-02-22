@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 const PORT = process.env.PORT || 3000;
 const apiUrl = `http://localhost:${PORT}/api/users`;
 
@@ -24,7 +26,7 @@ export const addUser = async (userData) => {
 };
 
 export const getAllUsers = async () => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get('token');
   try {
     const response = await fetch(apiUrl, {
       headers: {
@@ -55,7 +57,7 @@ export const logInUser = async (userData) => {
 
     if (response.ok) {
       const result = await response.json();
-      localStorage.setItem('token', result.token);
+      Cookies.set('token', result.token, { expires: 7, secure: true });
       return result;
     } else {
       console.log(response);

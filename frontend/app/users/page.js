@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userServices";
 import { redirect, useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
+import Cookies from "js-cookie";
 
 const UsersListPage = () => {
   const [users, setUsers] = useState([]);
@@ -26,7 +27,7 @@ const UsersListPage = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    Cookies.remove('token');
     router.push("/login");
   };
 
