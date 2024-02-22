@@ -69,7 +69,7 @@ const RegisterPage = () => {
     <div className="form">
       <h1>Register</h1>
       {formError?.empty && (
-        <p style={{ color: "red", fontSize: "12px" }}>{formError.message}</p>
+        <p style={{ color: "red", fontSize: "13px" }}>{formError.message}</p>
       )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name: </label>
@@ -121,7 +121,7 @@ const RegisterPage = () => {
       <p>
         Already have an account?<Link href={"/login"}>{" Log In"}</Link>
       </p>
-      <Toaster position="bottom-left"/>
+      <Toaster position="bottom-left" />
     </div>
   );
 };

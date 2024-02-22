@@ -54,7 +54,7 @@ function LoginPage() {
       <p>
         Don't have an account?<Link href={"/register"}>{" Register"}</Link>
       </p>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 }

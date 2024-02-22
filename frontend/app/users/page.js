@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userServices";
 import { redirect, useRouter } from "next/navigation";
-import toast, {Toaster} from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const UsersListPage = () => {
   const [users, setUsers] = useState([]);
@@ -26,22 +26,23 @@ const UsersListPage = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    router.push('/login');
-  }
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
-    redirect('/login');
+    // Redirect to login page to avoid unauthorized access to users list.
+    redirect("/login");
   }
 
   return (
     <div className="users-list">
       <h1>Users List</h1>
-      <div style={{overflowY: 'auto'}}>
+      <div className="table-container">
         <table>
           <thead>
             <tr>
@@ -59,8 +60,10 @@ const UsersListPage = () => {
           </tbody>
         </table>
       </div>
-      <button className="logout-btn" onClick={handleLogout}>LOGOUT</button>
-      <Toaster position="bottom-left"/>
+      <button className="logout-btn" onClick={handleLogout}>
+        LOGOUT
+      </button>
+      <Toaster position="bottom-left" />
     </div>
   );
 };
