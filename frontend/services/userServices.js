@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 const PORT = process.env.PORT || 3000;
 const apiUrl = `http://localhost:${PORT}/api/users`;
 
+// Create a new user
 export const addUser = async (userData) => {
   try {
     const response = await fetch(apiUrl, {
@@ -25,6 +26,7 @@ export const addUser = async (userData) => {
   }
 };
 
+// Get the user list without sensitive data 
 export const getAllUsers = async () => {
   const token = Cookies.get('token');
   try {
@@ -45,6 +47,8 @@ export const getAllUsers = async () => {
   }
 };
 
+
+// Get token for existing user
 export const logInUser = async (userData) => {
   try {
     const response = await fetch(`${apiUrl}/login`, {
